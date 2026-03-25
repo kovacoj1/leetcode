@@ -1,0 +1,58 @@
+name: Daily LeetCode Issue
+
+on:
+  schedule:
+    - cron: "7 13 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  create-daily-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v5
+        with:
+          token: ${{ github.token }}
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch daily LeetCode ID
+        id: dailycode
+        uses: ./.github/actions/daily-problem
+
+      - name: Get date
+        id: date
+        run: echo "today=$(date -u +'%Y-%m-%d')" >> "$GITHUB_OUTPUT"
+
+      - name: Create issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const today = "${{ steps.date.outputs.today }}";
+            const problemId = "${{ steps.dailycode.outputs.problem_id }}";
+            const title = `problem(${problemId}): solve daily problem [${today}]`;
+
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "open"
+            });
+
+            if (issues.some(issue => issue.title === title)) return;
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title,
+              body: `Solve LeetCode daily problem #${problemId}.`
+            });

@@ -1,0 +1,8 @@
+name: "Fetch LeetCode Daily ID"
+description: "Fetch the frontend ID of the current LeetCode daily problem"
+outputs:
+  problem_id:
+    description: "LeetCode frontend problem ID"
+runs:
+  using: "node20"
+  main: "index.js"
