@@ -12,24 +12,13 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def sameTree(self, A: TreeNode, B: TreeNode) -> bool:
-        if not A or not B:
-            return not A and not B
-
-        return A.val == B.val \
-            and self.sameTree(A.left, B.left) \
-            and self.sameTree(A.right, B.right)
-
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
-        def traverse(root):
-            if not root:
-                return root == subRoot
+        def serialize(node):
+            if not node:
+                return "#"
+            return f"^{node.val},{serialize(node.left)},{serialize(node.right)}"
 
-            possible = self.sameTree(root, subRoot) if root.val == subRoot.val else False
+        return serialize(subRoot) in serialize(root)
 
-            return possible or traverse(root.left) or traverse(root.right)
-
-        return traverse(root)
-        
 # @lc code=end
 
