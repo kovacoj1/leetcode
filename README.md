@@ -1,112 +1,87 @@
-# LeetCode Practice Repository
+# LeetCode Practice
 
-This repository is a personal data structures and algorithms practice space.
+[![Daily Problem](https://img.shields.io/github/actions/workflow/status/kovacoj1/leetcode/daily-problem.yml?label=daily%20automation&style=flat-square)](https://github.com/kovacoj1/leetcode/actions/workflows/daily-problem.yml)
+[![Issues](https://img.shields.io/github/issues/kovacoj1/leetcode?style=flat-square)](https://github.com/kovacoj1/leetcode/issues)
+[![License](https://img.shields.io/github/license/kovacoj1/leetcode?style=flat-square)](LICENSE)
 
-It has two goals:
+A structured data structures and algorithms practice repository with automated daily problem tracking.
 
-1. keep a growing set of self-contained LeetCode solutions
-2. automate a daily reminder workflow through GitHub Issues
+## What This Is
 
-## Repository Layout
+This repo is a personal DSA practice log. Each problem is a single self-contained Python file, organized by LeetCode problem ID. A GitHub Actions workflow automatically creates a daily issue for the current LeetCode problem, keeping practice consistent over time.
 
-- `problems/`: individual LeetCode solutions in Python
-- `.github/workflows/daily-problem.yml`: scheduled workflow that creates a daily issue
-- `.github/actions/daily-problem/`: custom GitHub Action that fetches the current LeetCode daily problem ID
-- `TODO.md`: study plan and topic roadmap
-- `AGENTS.md`: repo-specific instructions for coding agents
+## Repository Structure
 
-## Problem Files
+```
+problems/<id>.<slug>.py     # one file per solved problem
+.github/workflows/          # daily problem automation
+.github/actions/            # custom action: fetch daily LeetCode ID
+AGENTS.md                   # agent workflow guidance
+TODO.md                     # study plan and topic roadmap
+```
 
-Each LeetCode solution lives in a single file named like this:
+### Problem Files
 
-`problems/<id>.<slug>.py`
+Each solution follows the naming convention `problems/<id>.<slug>.py`:
 
-Examples:
+| File | Problem | Technique |
+|------|---------|-----------|
+| `35.search-insert-position.py` | Search Insert Position | Binary search |
+| `42.trapping-rain-water.py` | Trapping Rain Water | Two pointers |
+| `208.implement-trie-prefix-tree.py` | Implement Trie | Trie |
+| `494.target-sum.py` | Target Sum | Memoized DFS |
 
-- `problems/35.search-insert-position.py`
-- `problems/208.implement-trie-prefix-tree.py`
-- `problems/42.trapping-rain-water.py`
+Solutions are intentionally self-contained — no shared modules, no framework, just a clean `class Solution` implementation per file.
 
-The solution files are intentionally simple:
+## Topics Covered
 
-- no shared helper package
-- no repo-wide problem framework
-- each file should stay self-contained
+Based on the study plan in `TODO.md`:
 
-That keeps every solution easy to review in isolation and close to the format used on LeetCode itself.
+- **Two Pointers** — palindrome checks, container problems, sorted-array search
+- **Binary Search** — insert position, range search, rotated arrays
+- **Prefix Sum** — range queries, subarray sums
+- **DFS / BFS** — tree traversals, grid search, shortest paths
+- **Recursion / Backtracking** — subsets, parentheses, combinatorial search
+- **Queue** — rolling windows, circular buffers
+- **Trie** — prefix matching, word search
 
 ## Daily Problem Automation
 
-The repository includes a GitHub Actions workflow that runs daily and opens an issue for the current LeetCode daily problem.
+A scheduled GitHub Actions workflow runs daily at 06:15 CET and:
 
-Current behavior:
+1. Queries the LeetCode GraphQL API for the current daily problem
+2. Opens a GitHub Issue if one does not already exist for that day
 
-- the workflow runs on a schedule and also supports manual dispatch
-- it queries the LeetCode GraphQL API for the current daily problem
-- it creates an issue only if an open issue for that day does not already exist
-
-This automation is implemented with:
-
-- GitHub Actions workflow YAML in `.github/workflows/daily-problem.yml`
-- a small Node-based custom action in `.github/actions/daily-problem/index.js`
+This can also be triggered manually via `workflow_dispatch`.
 
 ## Practice Philosophy
 
-This repo is for practice, not for outsourcing unsolved DSA work.
-
-That means the preferred workflow is:
+This repo is for personal practice. The goal is to build consistent DSA skills over time:
 
 - solve or attempt problems personally
-- use the repo to store finished or iterated solutions
-- use agents for review, edge cases, debugging help, refactoring, and repository improvements
-- avoid having agents fully solve unsolved LeetCode problems from scratch
+- store finished and iterated solutions
+- use agents for review, edge cases, debugging, and refactoring — not for solving unsolved problems
 
-## Working With Agents
+## Commit Conventions
 
-This repo is set up to work well with coding agents, but with clear boundaries.
+This repo uses [Conventional Commits](https://www.conventionalcommits.org/):
 
-Agents are useful here for:
+| Type | Usage | Example |
+|------|-------|---------|
+| `feat` | new solution or feature | `feat(35): add binary search solution` |
+| `fix` | bug fix in a solution or action | `fix(ci): update node version` |
+| `refactor` | improve an existing solution | `refactor(42): simplify two-pointer logic` |
+| `docs` | documentation changes | `docs: expand README` |
+| `chore` | maintenance, tooling, CI | `chore: add .editorconfig` |
 
-- reviewing an existing solution for correctness or clarity
-- suggesting the smallest improvement to a solution
-- explaining time and space complexity
-- debugging a failing approach
-- improving the GitHub Action or repository docs
-- preparing commits and pull requests
+## Verification
 
-For repo-specific guidance, see `AGENTS.md`.
+There is no automated test suite. Verification is intentionally lightweight:
 
-## Commit Style
-
-For problem solutions, commits follow this format:
-
-`problem(<id>): <technique>`
-
-Examples:
-
-- `problem(35): binary search`
-- `problem(2078): bottom-up two-pointers`
-- `problem(3488): hash-table & binary search`
-
-For docs or automation changes, use a short imperative commit message that describes the change.
-
-## Verification Approach
-
-There is no full automated test suite for the problem files, so verification is intentionally lightweight.
-
-Typical checks are:
-
-- validate logic against the main examples and edge cases
+- validate logic against the problem's examples and edge cases
 - run a local harness if a problem file includes one
-- for GitHub Action changes, run `npm ci` and `node --check .github/actions/daily-problem/index.js`
+- for GitHub Action changes: `npm ci` and `node --check .github/actions/daily-problem/index.js`
 
-## Why This Repo Exists
+## License
 
-The main purpose of this repository is to build consistent DSA practice over time while keeping the process lightweight:
-
-- one file per solved problem
-- one issue per daily prompt
-- minimal tooling
-- clear history in Git
-
-That makes it easy to practice, review progress, and experiment with agent-assisted workflows without turning the repo into a large framework.
+Released into the public domain under the [Unlicense](LICENSE).
