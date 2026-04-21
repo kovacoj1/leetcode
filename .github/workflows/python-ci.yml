@@ -25,15 +25,39 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - uses: astral-sh/ruff-action@v3
+      - name: Collect changed Python files
+        id: changed-files
+        uses: tj-actions/changed-files@v46
         with:
-          args: check --select=E,F,W,UP,I --ignore=E501
+          files: problems/**/*.py
+
+      - name: Skip when no Python files changed
+        if: steps.changed-files.outputs.any_changed != 'true'
+        run: |
+          echo "No Python solution files changed."
+
+      - uses: astral-sh/ruff-action@v3
+        if: steps.changed-files.outputs.any_changed == 'true'
+        with:
+          args: check --select=E,F,W,UP,I --ignore=E501 ${{ steps.changed-files.outputs.all_changed_files }}
 
   format:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
 
-      - uses: astral-sh/ruff-action@v3
+      - name: Collect changed Python files
+        id: changed-files
+        uses: tj-actions/changed-files@v46
         with:
-          args: format --check
+          files: problems/**/*.py
+
+      - name: Skip when no Python files changed
+        if: steps.changed-files.outputs.any_changed != 'true'
+        run: |
+          echo "No Python solution files changed."
+
+      - uses: astral-sh/ruff-action@v3
+        if: steps.changed-files.outputs.any_changed == 'true'
+        with:
+          args: format --check ${{ steps.changed-files.outputs.all_changed_files }}

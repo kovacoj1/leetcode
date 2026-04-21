@@ -79,7 +79,7 @@ This repo uses [Conventional Commits](https://www.conventionalcommits.org/):
 
 There is no automated test suite. Verification is intentionally lightweight:
 
-- **Python CI**: Ruff checks lint (`E`, `F`, `W`, `UP`, `I`) and format on every push/PR that touches `problems/` or Python CI config
+- **Python CI**: Ruff checks lint (`E`, `F`, `W`, `UP`, `I`) and format for changed `problems/*.py` files, plus manual CI/config validation via workflow dispatch
 - validate logic against the problem's examples and edge cases
 - run a local harness if a problem file includes one
 - for GitHub Action changes: `npm ci` and `node --check .github/actions/daily-problem/index.js`
