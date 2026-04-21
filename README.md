@@ -1,5 +1,6 @@
 # LeetCode Practice
 
+[![Python CI](https://img.shields.io/github/actions/workflow/status/kovacoj1/leetcode/python-ci.yml?label=ruff&style=flat-square)](https://github.com/kovacoj1/leetcode/actions/workflows/python-ci.yml)
 [![Daily Problem](https://img.shields.io/github/actions/workflow/status/kovacoj1/leetcode/daily-problem.yml?label=daily%20automation&style=flat-square)](https://github.com/kovacoj1/leetcode/actions/workflows/daily-problem.yml)
 [![Issues](https://img.shields.io/github/issues/kovacoj1/leetcode?style=flat-square)](https://github.com/kovacoj1/leetcode/issues)
 [![License](https://img.shields.io/github/license/kovacoj1/leetcode?style=flat-square)](LICENSE)
@@ -78,6 +79,7 @@ This repo uses [Conventional Commits](https://www.conventionalcommits.org/):
 
 There is no automated test suite. Verification is intentionally lightweight:
 
+- **Python CI**: Ruff checks lint (`E`, `F`, `W`, `UP`, `I`) and format on every push/PR that touches `problems/`
 - validate logic against the problem's examples and edge cases
 - run a local harness if a problem file includes one
 - for GitHub Action changes: `npm ci` and `node --check .github/actions/daily-problem/index.js`
