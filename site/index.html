@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LeetCode Topic Browser</title>
+    <meta
+      name="description"
+      content="Browse solved LeetCode problems by inferred topic based on git history."
+    >
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <p class="eyebrow">GitHub Pages</p>
+        <h1>LeetCode Topic Browser</h1>
+        <p class="lede">
+          Browse solved problems by inferred topic. Topics are derived from the git commit
+          messages that touched each tracked solution file.
+        </p>
+        <p class="links">
+          <a href="https://github.com/kovacoj1/leetcode">Repository</a>
+          <span>•</span>
+          <a href="https://github.com/kovacoj1/leetcode/blob/main/README.md">README</a>
+        </p>
+      </header>
+
+      <section class="panel summary" id="summary">
+        <div>
+          <span class="label">Solved problems</span>
+          <strong id="problem-count">-</strong>
+        </div>
+        <div>
+          <span class="label">Topics</span>
+          <strong id="topic-count">-</strong>
+        </div>
+        <div>
+          <span class="label">Generated</span>
+          <strong id="generated-at">-</strong>
+        </div>
+      </section>
+
+      <section class="panel controls">
+        <label for="topic-select">Select topic</label>
+        <select id="topic-select"></select>
+        <p class="hint">
+          Historical topics are inferred heuristically, so older commits may be broader than newer
+          ones.
+        </p>
+      </section>
+
+      <section class="panel topics">
+        <h2>Topics</h2>
+        <div id="topic-list" class="topic-list"></div>
+      </section>
+
+      <section class="panel results">
+        <div class="results-header">
+          <h2 id="results-title">All solved problems</h2>
+          <span id="results-count" class="results-count"></span>
+        </div>
+        <div id="results-empty" class="empty hidden">No solved problems found for this topic.</div>
+        <table id="results-table" class="results-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Problem</th>
+              <th>Topics</th>
+            </tr>
+          </thead>
+          <tbody id="results-body"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

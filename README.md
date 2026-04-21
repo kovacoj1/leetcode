@@ -20,12 +20,22 @@ It demonstrates:
 
 Each problem is stored as a single Python file named by LeetCode problem ID and slug.
 
+## Topic Browser
+
+Browse solved problems by inferred topic on GitHub Pages:
+
+- <https://kovacoj1.github.io/leetcode/>
+
+The topic browser is generated from git history. It uses the commit messages that touched each tracked problem file to infer topics such as `Two Pointers`, `Binary Search`, `DFS / BFS`, and `Trie`.
+
 ## Repository Structure
 
 ```
 problems/<id>.<slug>.py     # one file per solved problem
 .github/workflows/          # daily problem automation
 .github/actions/            # custom action: fetch daily LeetCode ID
+scripts/                    # lightweight repo tooling
+site/                       # GitHub Pages topic browser source
 AGENTS.md                   # agent workflow guidance
 TODO.md                     # study plan and topic roadmap
 ```
