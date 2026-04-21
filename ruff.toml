@@ -1,0 +1,12 @@
+target-version = "py312"
+
+[lint]
+select = ["E", "F", "W", "UP", "I"]
+ignore = [
+    "E501",
+    "F821",
+    "UP035",
+]
+
+[format]
+docstring-code-format = true

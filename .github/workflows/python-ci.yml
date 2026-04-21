@@ -1,0 +1,30 @@
+name: Python CI
+
+on:
+  push:
+    branches: [main]
+    paths: ["problems/**/*.py"]
+  pull_request:
+    paths: ["problems/**/*.py"]
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: astral-sh/ruff-action@v3
+        with:
+          args: check --select=E,F,W,UP,I --ignore=E501
+
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: astral-sh/ruff-action@v3
+        with:
+          args: format --check

@@ -29,7 +29,7 @@ Important constraints:
 - Preserve the one-file-per-problem structure.
 - Prefer clarity over cleverness unless the problem requires a specific optimization.
 - Do not introduce helper modules for LeetCode solutions.
-- Keep commit messages in the existing style: `problem(<id>): <technique>`.
+- Keep commit messages in Conventional Commits format: `type(scope): description` (e.g. `feat(35): add binary search solution`, `fix(ci): update node version`, `docs: expand README`).
 
 ## Good Task Types For Agents
 
@@ -103,8 +103,9 @@ If behavior changes are non-trivial, explain the expected runtime behavior in Gi
 - Do not commit unrelated files.
 - Do not rewrite history unless explicitly requested.
 - Keep commits focused.
-- For solution commits, use `problem(<id>): <technique>`.
-- For automation/docs commits, use a short imperative message that explains the change.
+- Use Conventional Commits: `type(scope): description`.
+- Solution commits: `feat(<id>): <technique>` (e.g. `feat(35): binary search`).
+- Automation/docs commits: `type: description` (e.g. `fix(ci): update node version`, `docs: expand README`).
 
 When opening a PR, include:
 
