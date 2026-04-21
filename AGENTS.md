@@ -15,7 +15,6 @@ This repo is also a DSA practice space for the user. Agents should not solve uns
 - `.github/workflows/daily-problem.yml`
 - `.github/actions/daily-problem/index.js`
 - `TODO.md`
-- `CLAUDE.md`
 
 Important constraints:
 
