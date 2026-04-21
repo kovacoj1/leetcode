@@ -1,15 +1,24 @@
 # LeetCode Practice
 
-[![Python CI](https://img.shields.io/github/actions/workflow/status/kovacoj1/leetcode/python-ci.yml?label=ruff&style=flat-square)](https://github.com/kovacoj1/leetcode/actions/workflows/python-ci.yml)
-[![Daily Problem](https://img.shields.io/github/actions/workflow/status/kovacoj1/leetcode/daily-problem.yml?label=daily%20automation&style=flat-square)](https://github.com/kovacoj1/leetcode/actions/workflows/daily-problem.yml)
+[![Python CI](https://img.shields.io/github/actions/workflow/status/kovacoj1/leetcode/python-ci.yml?branch=main&label=python%20ci&style=flat-square)](https://github.com/kovacoj1/leetcode/actions/workflows/python-ci.yml)
+[![Daily Automation](https://img.shields.io/github/actions/workflow/status/kovacoj1/leetcode/daily-problem.yml?branch=main&label=daily%20automation&style=flat-square)](https://github.com/kovacoj1/leetcode/actions/workflows/daily-problem.yml)
 [![Python](https://img.shields.io/badge/python-3.12-blue?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
 [![License](https://img.shields.io/github/license/kovacoj1/leetcode?style=flat-square)](LICENSE)
 
-A structured data structures and algorithms practice repository with automated daily problem tracking.
+Public record of my data structures and algorithms practice in Python, with lightweight CI and a custom GitHub Actions workflow for daily LeetCode tracking.
 
 ## What This Is
 
-This repo is a personal DSA practice log. Each problem is a single self-contained Python file, organized by LeetCode problem ID. A GitHub Actions workflow automatically creates a daily issue for the current LeetCode problem, keeping practice consistent over time.
+This repository shows how I approach algorithm practice as an engineering project rather than a pile of scratch files.
+
+It demonstrates:
+
+- self-contained Python problem solving
+- consistent file and commit conventions
+- custom GitHub Actions automation
+- lightweight CI with Ruff on changed solution files
+
+Each problem is stored as a single Python file named by LeetCode problem ID and slug.
 
 ## Repository Structure
 
@@ -20,6 +29,13 @@ problems/<id>.<slug>.py     # one file per solved problem
 AGENTS.md                   # agent workflow guidance
 TODO.md                     # study plan and topic roadmap
 ```
+
+## Snapshot
+
+- growing set of single-file Python solutions in `problems/`
+- custom GitHub Action for daily problem issue creation
+- Ruff-based Python CI for changed solution files
+- Conventional Commits for readable history
 
 ### Problem Files
 
@@ -32,11 +48,18 @@ Each solution follows the naming convention `problems/<id>.<slug>.py`:
 | `208.implement-trie-prefix-tree.py` | Implement Trie | Trie |
 | `494.target-sum.py` | Target Sum | Memoized DFS |
 
-Solutions are intentionally self-contained — no shared modules, no framework, just a clean `class Solution` implementation per file.
+Solutions are intentionally self-contained: no shared helper package, no abstraction layer, just a focused `class Solution` implementation per file.
+
+## Selected Examples
+
+- [`problems/42.trapping-rain-water.py`](./problems/42.trapping-rain-water.py): two-pointer technique
+- [`problems/208.implement-trie-prefix-tree.py`](./problems/208.implement-trie-prefix-tree.py): trie data structure
+- [`problems/494.target-sum.py`](./problems/494.target-sum.py): memoized DFS
+- [`problems/3488.closest-equal-element-queries.py`](./problems/3488.closest-equal-element-queries.py): hashing with indexed search
 
 ## Topics Covered
 
-Based on the study plan in `TODO.md`:
+Based on the study plan in [`TODO.md`](./TODO.md):
 
 - **Two Pointers** — palindrome checks, container problems, sorted-array search
 - **Binary Search** — insert position, range search, rotated arrays
@@ -51,13 +74,15 @@ Based on the study plan in `TODO.md`:
 A scheduled GitHub Actions workflow runs daily at 06:15 UTC and:
 
 1. Queries the LeetCode GraphQL API for the current daily problem
-2. Opens a GitHub Issue if one does not already exist for that day
+2. Opens a labeled GitHub Issue if one does not already exist for that day
 
 This can also be triggered manually via `workflow_dispatch`.
 
+Open daily issues are intentional practice backlog items, not product bugs.
+
 ## Practice Philosophy
 
-This repo is for personal practice. The goal is to build consistent DSA skills over time:
+This repo is for personal practice. The goal is to build consistent DSA skills over time while keeping the work reviewable and publishable:
 
 - solve or attempt problems personally
 - store finished and iterated solutions
@@ -77,9 +102,10 @@ This repo uses [Conventional Commits](https://www.conventionalcommits.org/):
 
 ## Verification
 
-There is no automated test suite. Verification is intentionally lightweight:
+There is no full automated test suite. Verification is intentionally lightweight:
 
-- **Python CI**: Ruff checks lint (`E`, `F`, `W`, `UP`, `I`) and format for changed `problems/*.py` files, plus manual CI/config validation via workflow dispatch
+- **Python CI**: Ruff checks lint (`E`, `F`, `W`, `UP`, `I`) and format for changed `problems/*.py` files
+- **Syntax smoke check**: changed `problems/*.py` files are compiled with Python to catch syntax errors early
 - validate logic against the problem's examples and edge cases
 - run a local harness if a problem file includes one
 - for GitHub Action changes: `npm ci` and `node --check .github/actions/daily-problem/index.js`

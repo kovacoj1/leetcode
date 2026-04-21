@@ -20,6 +20,32 @@ permissions:
   contents: read
 
 jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Collect changed Python files
+        id: changed-files
+        uses: tj-actions/changed-files@v46
+        with:
+          files: problems/**/*.py
+
+      - name: Skip when no Python files changed
+        if: steps.changed-files.outputs.any_changed != 'true'
+        run: |
+          echo "No Python solution files changed."
+
+      - name: Compile changed Python files
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          python -m py_compile ${{ steps.changed-files.outputs.all_changed_files }}
+
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -39,6 +65,7 @@ jobs:
       - uses: astral-sh/ruff-action@v3
         if: steps.changed-files.outputs.any_changed == 'true'
         with:
+          version: "0.15.11"
           args: check --select=E,F,W,UP,I --ignore=E501 ${{ steps.changed-files.outputs.all_changed_files }}
 
   format:
@@ -60,4 +87,5 @@ jobs:
       - uses: astral-sh/ruff-action@v3
         if: steps.changed-files.outputs.any_changed == 'true'
         with:
+          version: "0.15.11"
           args: format --check ${{ steps.changed-files.outputs.all_changed_files }}

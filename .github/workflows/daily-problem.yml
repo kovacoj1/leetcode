@@ -9,6 +9,10 @@ permissions:
   contents: read
   issues: write
 
+concurrency:
+  group: daily-problem
+  cancel-in-progress: false
+
 jobs:
   create-daily-issue:
     runs-on: ubuntu-latest
@@ -40,7 +44,20 @@ jobs:
           script: |
             const today = "${{ steps.date.outputs.today }}";
             const problemId = "${{ steps.dailycode.outputs.problem_id }}";
+            const problemSlug = "${{ steps.dailycode.outputs.problem_slug }}";
             const title = `problem(${problemId}): solve daily problem [${today}]`;
+            const labels = [
+              {
+                name: "daily-problem",
+                color: "1d76db",
+                description: "Automatically created daily LeetCode practice item"
+              },
+              {
+                name: "practice",
+                color: "5319e7",
+                description: "Practice backlog item"
+              }
+            ];
 
             const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
@@ -50,9 +67,37 @@ jobs:
 
             if (issues.some(issue => issue.title === title)) return;
 
+            for (const label of labels) {
+              try {
+                await github.rest.issues.getLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: label.name
+                });
+              } catch (error) {
+                if (error.status !== 404) throw error;
+
+                await github.rest.issues.createLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: label.name,
+                  color: label.color,
+                  description: label.description
+                });
+              }
+            }
+
             await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               title,
-              body: `Solve LeetCode daily problem #${problemId}.`
+              labels: labels.map(label => label.name),
+              body: [
+                `Daily LeetCode practice item for ${today}.`,
+                "",
+                `- Problem ID: ${problemId}`,
+                `- Link: https://leetcode.com/problems/${problemSlug}/`,
+                "",
+                "Use this issue to track your attempt, notes, and follow-up cleanup."
+              ].join("\n")
             });

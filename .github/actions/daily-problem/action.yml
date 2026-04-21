@@ -3,6 +3,8 @@ description: "Fetch the frontend ID of the current LeetCode daily problem"
 outputs:
   problem_id:
     description: "LeetCode frontend problem ID"
+  problem_slug:
+    description: "LeetCode problem title slug"
 runs:
   using: "node24"
   main: "index.js"

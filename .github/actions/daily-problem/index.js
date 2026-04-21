@@ -15,6 +15,7 @@ async function run() {
             activeDailyCodingChallengeQuestion {
               question {
                 questionFrontendId
+                titleSlug
               }
             }
           }
@@ -30,12 +31,15 @@ async function run() {
         const payload = await response.json();
         const problemId =
             payload?.data?.activeDailyCodingChallengeQuestion?.question?.questionFrontendId;
+        const problemSlug =
+            payload?.data?.activeDailyCodingChallengeQuestion?.question?.titleSlug;
 
-        if (!problemId) {
-            throw new Error("questionFrontendId was not found in the response");
+        if (!problemId || !problemSlug) {
+            throw new Error("Daily problem metadata was not found in the response");
         }
 
         core.setOutput("problem_id", String(problemId));
+        core.setOutput("problem_slug", String(problemSlug));
     } catch (error) {
         core.setFailed(error instanceof Error ? error.message : String(error));
     }

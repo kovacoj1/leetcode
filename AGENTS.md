@@ -40,6 +40,7 @@ Agents are a strong fit for:
 - Explaining time and space complexity for a solution.
 - Giving hints or partial guidance on a problem without fully solving it.
 - Updating the daily GitHub Action.
+- Updating repository metadata, README quality, and lightweight CI.
 - Preparing a branch, commit, or PR summary.
 
 Agents are a weaker fit for:
@@ -119,7 +120,6 @@ Use prompts like these:
 
 - `Review my solution in problems/42.trapping-rain-water.py for correctness, edge cases, and unnecessary complexity. Suggest the smallest improvement.`
 - `Give me a hint for today's LeetCode daily problem without solving it.`
-- `Review problems/42.trapping-rain-water.py for correctness, edge cases, and unnecessary complexity. Suggest the smallest improvement.`
 - `Update the daily GitHub Action to fail more clearly when the LeetCode API shape changes. Keep the change minimal and verify syntax.`
 - `Prepare a PR summary for the current branch based on all changes since main.`
 
