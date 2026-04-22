@@ -1,9 +1,9 @@
 # LeetCode Practice
 
-[![Python CI](https://img.shields.io/github/actions/workflow/status/kovacoj1/leetcode/python-ci.yml?branch=main&label=python%20ci&style=flat-square)](https://github.com/kovacoj1/leetcode/actions/workflows/python-ci.yml)
-[![Daily Automation](https://img.shields.io/github/actions/workflow/status/kovacoj1/leetcode/daily-problem.yml?branch=main&label=daily%20automation&style=flat-square)](https://github.com/kovacoj1/leetcode/actions/workflows/daily-problem.yml)
+[![Python CI](https://img.shields.io/github/actions/workflow/status/kovacoj/leetcode/python-ci.yml?branch=main&label=python%20ci&style=flat-square)](https://github.com/kovacoj/leetcode/actions/workflows/python-ci.yml)
+[![Daily Automation](https://img.shields.io/github/actions/workflow/status/kovacoj/leetcode/daily-problem.yml?branch=main&label=daily%20automation&style=flat-square)](https://github.com/kovacoj/leetcode/actions/workflows/daily-problem.yml)
 [![Python](https://img.shields.io/badge/python-3.12-blue?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
-[![License](https://img.shields.io/github/license/kovacoj1/leetcode?style=flat-square)](LICENSE)
+[![License](https://img.shields.io/github/license/kovacoj/leetcode?style=flat-square)](LICENSE)
 
 Public record of my data structures and algorithms practice in Python, with lightweight CI and a custom GitHub Actions workflow for daily LeetCode tracking.
 
@@ -24,7 +24,7 @@ Each problem is stored as a single Python file named by LeetCode problem ID and 
 
 Browse solved problems by inferred topic on GitHub Pages:
 
-- <https://kovacoj1.github.io/leetcode/>
+- <https://kovacoj.github.io/leetcode/>
 
 The topic browser is generated from git history. It uses the commit messages that touched each tracked problem file to infer topics such as `Two Pointers`, `Binary Search`, `DFS / BFS`, and `Trie`.
 
