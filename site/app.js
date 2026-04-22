@@ -1,21 +1,9 @@
-const topicSelect = document.querySelector("#topic-select");
 const topicList = document.querySelector("#topic-list");
 const resultsTitle = document.querySelector("#results-title");
 const resultsCount = document.querySelector("#results-count");
 const resultsBody = document.querySelector("#results-body");
 const resultsTable = document.querySelector("#results-table");
 const resultsEmpty = document.querySelector("#results-empty");
-const problemCount = document.querySelector("#problem-count");
-const topicCount = document.querySelector("#topic-count");
-const generatedAt = document.querySelector("#generated-at");
-
-function formatGeneratedDate(value) {
-  const date = new Date(value);
-  return new Intl.DateTimeFormat(undefined, {
-    dateStyle: "medium",
-    timeStyle: "short",
-  }).format(date);
-}
 
 function renderTopics(data, currentTopic) {
   topicList.innerHTML = "";
@@ -28,7 +16,6 @@ function renderTopics(data, currentTopic) {
     button.className = `topic-pill${topic.name === currentTopic ? " active" : ""}`;
     button.textContent = `${topic.name} (${topic.count})`;
     button.addEventListener("click", () => {
-      topicSelect.value = topic.name;
       renderResults(data, topic.name);
     });
     topicList.append(button);
@@ -116,25 +103,8 @@ async function main() {
 
   const data = await response.json();
 
-  problemCount.textContent = String(data.totalProblems);
-  topicCount.textContent = String(data.topics.length);
-  generatedAt.textContent = formatGeneratedDate(data.generatedAt);
-
-  topicSelect.innerHTML = "";
-  for (const topic of [{ name: "All Topics" }, ...data.topics]) {
-    const option = document.createElement("option");
-    option.value = topic.name;
-    option.textContent = topic.name;
-    topicSelect.append(option);
-  }
-
   const initialTopic = resolveInitialTopic(data);
-  topicSelect.value = initialTopic;
   renderResults(data, initialTopic);
-
-  topicSelect.addEventListener("change", () => {
-    renderResults(data, topicSelect.value);
-  });
 }
 
 main().catch((error) => {
