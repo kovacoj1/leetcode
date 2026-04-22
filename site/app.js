@@ -51,6 +51,8 @@ function renderResults(data, topicName) {
 
   for (const problem of filteredProblems) {
     const row = document.createElement("tr");
+    const solutionUrl = problem.solutionUrl || problem.url || `https://github.com/kovacoj/leetcode/blob/main/${problem.path}`;
+    const leetcodeUrl = problem.leetcodeUrl || `https://leetcode.com/problems/${problem.slug}/`;
 
     const idCell = document.createElement("td");
     idCell.textContent = String(problem.id);
@@ -60,7 +62,7 @@ function renderResults(data, topicName) {
 
     const solutionCell = document.createElement("td");
     const solutionLink = document.createElement("a");
-    solutionLink.href = problem.solutionUrl;
+    solutionLink.href = solutionUrl;
     solutionLink.textContent = problem.path;
     solutionLink.target = "_blank";
     solutionLink.rel = "noreferrer";
@@ -68,7 +70,7 @@ function renderResults(data, topicName) {
 
     const leetcodeCell = document.createElement("td");
     const leetcodeLink = document.createElement("a");
-    leetcodeLink.href = problem.leetcodeUrl;
+    leetcodeLink.href = leetcodeUrl;
     leetcodeLink.textContent = "Open problem";
     leetcodeLink.target = "_blank";
     leetcodeLink.rel = "noreferrer";

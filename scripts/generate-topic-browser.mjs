@@ -113,6 +113,7 @@ const problems = files.map((file) => {
     slug,
     title: toTitleCase(slug),
     path: file,
+    url: `${repoUrl}/blob/main/${file}`,
     solutionUrl: `${repoUrl}/blob/main/${file}`,
     leetcodeUrl: `https://leetcode.com/problems/${slug}/`,
     topics: extractTopics(subjects),
