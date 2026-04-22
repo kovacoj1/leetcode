@@ -56,26 +56,25 @@ function renderResults(data, topicName) {
     idCell.textContent = String(problem.id);
 
     const titleCell = document.createElement("td");
-    const link = document.createElement("a");
-    link.href = problem.url;
-    link.textContent = problem.title;
-    link.target = "_blank";
-    link.rel = "noreferrer";
-    titleCell.append(link);
+    titleCell.textContent = problem.title;
 
-    const topicsCell = document.createElement("td");
-    const topicWrapper = document.createElement("div");
-    topicWrapper.className = "tag-list";
+    const solutionCell = document.createElement("td");
+    const solutionLink = document.createElement("a");
+    solutionLink.href = problem.solutionUrl;
+    solutionLink.textContent = problem.path;
+    solutionLink.target = "_blank";
+    solutionLink.rel = "noreferrer";
+    solutionCell.append(solutionLink);
 
-    for (const topic of problem.topics) {
-      const tag = document.createElement("span");
-      tag.className = "tag";
-      tag.textContent = topic;
-      topicWrapper.append(tag);
-    }
+    const leetcodeCell = document.createElement("td");
+    const leetcodeLink = document.createElement("a");
+    leetcodeLink.href = problem.leetcodeUrl;
+    leetcodeLink.textContent = "Open problem";
+    leetcodeLink.target = "_blank";
+    leetcodeLink.rel = "noreferrer";
+    leetcodeCell.append(leetcodeLink);
 
-    topicsCell.append(topicWrapper);
-    row.append(idCell, titleCell, topicsCell);
+    row.append(idCell, titleCell, solutionCell, leetcodeCell);
     resultsBody.append(row);
   }
 }
